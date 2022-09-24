@@ -28,3 +28,5 @@ def main():
         print(check_quarter(x, y))
     except:
         print("Неверный ввод")
+
+main()

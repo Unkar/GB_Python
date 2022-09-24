@@ -22,3 +22,5 @@ def main():
             print("Нет")
     except:
         print("Неверный ввод")   
+
+main()

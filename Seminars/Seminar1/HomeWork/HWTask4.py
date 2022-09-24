@@ -43,3 +43,5 @@ def main():
         print(calc(x, y, operator))
     except:
         print("Неверный ввод")
+
+main()
