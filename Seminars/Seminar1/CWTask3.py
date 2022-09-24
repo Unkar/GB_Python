@@ -4,33 +4,57 @@ import random
 
 
 def create_2d_array(rows, columns):
-    array = []
+    int_Array = []
     for i in range(rows):
-        array.append([])
+        int_Array.append([])
         for j in range(columns):
-            array[i].append(0)
-    return array
+            int_Array[i].append(0)
+    return int_Array
 
 
-def fill_random_2d_array(array):
-    for i in range(len(array)):
-        for j in range(len(array)):
-            array[i][j] = input(randint(0, 100))
-    return array
+def fill_random_2d_array(int_Array):
+    for i in range(len(int_Array)):
+        for j in range(len(int_Array[i])):
+            int_Array[i][j] = input(randint(0, 100))
+    return int_Array
 
 
-def print_2d_array(array):
-    for i in range(len(array)):
-        for j in range(len(array)):
-            print(array[i][j], end=' ')
+def print_2d_array(int_Array):
+    for i in range(len(int_Array)):
+        for j in range(len(int_Array[i])):
+            print(int_Array[i][j], end=' ')
         print()
 
+def sort_array_by_rows(int_Array):
+    for i in range(len(int_Array)):
+        for j in range(len(int_Array[i])):
+            for k in range(len(int_Array[i]) - 1):
+                if int_Array[i][k] > int_Array[i][k + 1]:
+                    int_Array[i][k], int_Array[i][k + 1] = int_Array[i][k + 1], int_Array[i][k]
+    return int_Array
+
+def sort_array_by_columns(int_Array):
+    for i in range(len(int_Array)):
+        for j in range(len(int_Array[i])):
+            for k in range(len(int_Array) - 1):
+                if int_Array[k][j] > int_Array[k + 1][j]:
+                    int_Array[k][j], int_Array[k + 1][j] = int_Array[k + 1][j], int_Array[k][j]
+    return int_Array
+
+def print_2d_array(int_Array):
+    for i in range(len(int_Array)):
+        for j in range(len(int_Array[i])):
+            print(int_Array[i][j], end=' ')
+        print()
 
 try:
     rows = int(input("Введите количество строк: "))
     columns = int(input("Введите количество столбцов: "))
-    array = create_2d_array(rows, columns)
-    array = fill_random_2d_array(array)
-    print_2d_array(array)
+    int_Array = create_2d_array(rows, columns)
+    int_Array = fill_random_2d_array(int_Array)
+    print_2d_array(int_Array)
+    int_Array = sort_array_by_rows(int_Array)
+    int_Array = sort_array_by_columns(int_Array)
+    print_2d_array(int_Array)
 except:
     print("Неверный ввод")
