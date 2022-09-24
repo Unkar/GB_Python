@@ -35,10 +35,11 @@ def calc(x, y, operator):
     else:
         return "Неверный оператор"
 
-try:
-    x = float(input("Введите первое число: "))
-    y = float(input("Введите второе число: "))
-    operator = input("Введите оператор: ")
-    print(calc(x, y, operator))
-except:
-    print("Неверный ввод")
+def main():
+    try:
+        x = float(input("Введите первое число: "))
+        y = float(input("Введите второе число: "))
+        operator = input("Введите оператор: ")
+        print(calc(x, y, operator))
+    except:
+        print("Неверный ввод")

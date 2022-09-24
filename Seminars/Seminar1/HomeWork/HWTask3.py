@@ -21,11 +21,10 @@ def check_quarter(x, y):
         return "На оси X"
     else:
         return "В начале координат"
-
-try:
-    x = int(input("Введите координату X: "))
-    y = int(input("Введите координату Y: "))
-    print(check_quarter(x, y))
-except:
-    print("Неверный ввод")
-    
+def main():
+    try:
+        x = int(input("Введите координату X: "))
+        y = int(input("Введите координату Y: "))
+        print(check_quarter(x, y))
+    except:
+        print("Неверный ввод")

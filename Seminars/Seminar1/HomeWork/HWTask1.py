@@ -13,11 +13,12 @@ def check_weekend_day(day_of_week):
     else:
         return False
 
-try:
-    day_of_week = int(input("Введите цифру от 1(Пн) до 7(Вс) обозначающую день недели: "))
-    if check_weekend_day(day_of_week):
-        print("Да")
-    else:
-        print("Нет")
-except:
-    print("Неверный ввод")   
+def main():
+    try:
+        day_of_week = int(input("Введите цифру от 1(Пн) до 7(Вс) обозначающую день недели: "))
+        if check_weekend_day(day_of_week):
+            print("Да")
+        else:
+            print("Нет")
+    except:
+        print("Неверный ввод")   
