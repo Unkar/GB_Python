@@ -13,5 +13,4 @@ for i in range(len(string_long)):
         counter += 1
 
 print(counter)
-
-        
+     
