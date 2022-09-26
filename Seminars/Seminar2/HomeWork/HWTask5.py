@@ -56,7 +56,7 @@ def print_check_statement(array):
         print(f" -> {check_statement(array[i])}")
 
 def main():
-    number = 12
+    number = random.randint(5, 11)
     array = check_list_predicate(number)
     for i in range(10):
         print(f"Проверка №{i+1}")
