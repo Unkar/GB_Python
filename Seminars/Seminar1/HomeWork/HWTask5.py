@@ -8,7 +8,6 @@
 # 5 7 9 10
 import random
 
-
 def generate_2d_random_array(rows, columns):
     array = []
     for i in range(rows):
