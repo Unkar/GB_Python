@@ -8,7 +8,7 @@ def sum_digits(number):
     sum = 0
     if number < 0:
         number = -number
-        
+
     number_before_dot = round(number)
     number_after_dot = number - number_before_dot
 
@@ -27,5 +27,5 @@ def main():
     number = float(input("Введите число: "))
     print(sum_digits(number))   
 
-if __name__ == "__main__":
+if __name__ == "__main__": #Запуск программы если файл запущен как основной
     main()
