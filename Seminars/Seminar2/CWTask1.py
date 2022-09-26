@@ -13,3 +13,4 @@ def distance(A,B):
     return ((A[0]-B[0])**2+(A[1]-B[1])**2)**0.5
 
 print("Расстояние между точками A и B: ", distance(A,B))
+
