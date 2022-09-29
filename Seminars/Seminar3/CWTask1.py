@@ -18,8 +18,8 @@ def sum(n):
 
 def main():
     n = int(input("Enter n: "))
+    list_sequence = feel_list(n)
     print("Sum of sequence: ", sum(n))
 
 if __name__ == "__main__":
     main()
-    
