@@ -17,6 +17,7 @@ def read_file():
     list = []
     for line in file:
         list.append(int(line))
+    file.close()
     return list
 
 def multi_on_pos(list, pos):

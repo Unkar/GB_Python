@@ -1,7 +1,7 @@
 #  16. Задайте список из n чисел последовательности (1 + 1/n)*n  и выведите на экран их сумму.
 
 def sequence(n):
-    return (1 + 1/n)*n
+    return (1 + 1/n)**n
 
 def feel_list(n):
     list = []
@@ -9,17 +9,11 @@ def feel_list(n):
         list.append(sequence(i))
     return list
 
-def sum(n):
-    list = feel_list(n)
-    sum = 0
-    for i in list:
-        sum += i
-    return sum
-
 def main():
     n = int(input("Enter n: "))
     list_sequence = feel_list(n)
-    print("Sum of sequence: ", sum(n))
+    print(list_sequence)
+    print("Sum of sequence: ", sum(list_sequence))
 
 if __name__ == "__main__":
     main()
