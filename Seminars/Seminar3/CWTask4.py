@@ -8,16 +8,16 @@
 # - список: ["123", "234", 123, "567"], ищем: "123", ответ: -1
 # - список: [], ищем: "123", ответ: -1
 list = ["qwe", "asd", "zxc", "qwe", "ertqwe"]
-search = input("Введите искомую строку: ")
+search = str(input("Введите искомую строку: "))
 
 def find_second(list, search):
     result = -1
     count = 0
-    for i in list:
-        if i == search:
+    for i in range(len(list)):
+        if list[i] == search:
             count += 1
             if count == 2:
-                result = list.index(i)
+                result = i
     return result
 
 def main():
