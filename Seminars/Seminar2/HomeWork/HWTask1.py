@@ -41,6 +41,7 @@ def main():
     print(f"сумма цифр целой части: {sum_digits(integer_part)}")
     print(f"Дробная часть: {fractional_part}")
     print(f"сумма цифр дробной части: {sum_digits(fractional_part, get_fractional_count_digits(number))}")
+    print(f"Сумма цифр числа: {sum_digits(integer_part) + sum_digits(fractional_part, get_fractional_count_digits(number))}")
     # print(sum_digits(number))   
 
 if __name__ == "__main__": #Запуск программы если файл запущен как основной
