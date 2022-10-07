@@ -14,7 +14,7 @@ def main():
     # Коэффициент генерации строк, сколько раз будет генерироваться символы в строке.
     # Сделан, чтобы были совпадающие символы в строке.
     quantity_generation = int(input('Введите коэффициент генерациии: '))
-    filename = PATH + "HWT_input_string.txt"
+    filename = PATH + "HWT_original_string.txt"
     save_string_to_file(filename, random_string_generator(quantity_generation))
 
 if __name__ == '__main__':
