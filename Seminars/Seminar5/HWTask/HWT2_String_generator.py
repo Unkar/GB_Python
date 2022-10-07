@@ -1,4 +1,4 @@
-PATH ="Seminars\Seminar5\HWTask\"
+PATH = "Seminars/Seminar5/HWTask/"
 
 def random_string_generator(length):
     import random
