@@ -4,7 +4,7 @@ import string
 PATH = "Seminars/Seminar5/HWTask/"
 
 def random_string_generator(quantity_generation):
-    return ''.join(random.choice(string.printable)*random.randint(1,4) for i in range(quantity_generation))
+    return ''.join(random.choice(string.ascii_letters)*random.randint(1,4) for i in range(quantity_generation))
 
 def save_string_to_file(filename, string):
     with open(filename, 'w') as f:
