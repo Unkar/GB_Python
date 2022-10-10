@@ -8,6 +8,7 @@
     
 #     1-2*3 => -5;
 
+
 def calc(expression):
     if expression.find('+') != -1:
         return calc(expression[:expression.find('+')]) + calc(expression[expression.find('+') + 1:])
@@ -17,6 +18,6 @@ def calc(expression):
         return calc(expression[:expression.find('*')]) * calc(expression[expression.find('*') + 1:])
     if expression.find('/') != -1:
         return calc(expression[:expression.find('/')]) / calc(expression[expression.find('/') + 1:])
-    return int(expression)
+    return float(expression)
 
 print(calc(input()))
