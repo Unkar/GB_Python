@@ -127,3 +127,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+Seminars/Seminar7/CWTask1/logger.py
