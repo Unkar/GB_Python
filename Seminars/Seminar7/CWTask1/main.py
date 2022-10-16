@@ -4,6 +4,7 @@ import menu as m
 import logger as log
 import datetime as dt
 import calculator as calc
+import complex_calculator as cc
 
 
 def main():
@@ -12,8 +13,10 @@ def main():
         if value == '1':
             calc.main()
         elif value == '2':
-            settings_menu()
+            cc.main()
         elif value == '3':
+            settings_menu()
+        elif value == '4':
             break
 
 

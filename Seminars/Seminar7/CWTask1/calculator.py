@@ -31,7 +31,7 @@ def main():
             log.write_log_calc(expression, calculate(expression))
         except Exception as e:
             print("Ошибка ввода выражения. Повторите ввод. Тип ошибки:" + str(e))
-            log.write_log_error("Ошибка ввода выражения. Повторите ввод. Тип ошибки:" + str(e))
+            log.write_log_error("Ошибка ввода выражения. Повторите ввод. Тип ошибки: " + str(e))
 
 
 if __name__ == '__main__':
