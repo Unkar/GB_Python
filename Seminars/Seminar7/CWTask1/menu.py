@@ -1,55 +1,46 @@
+from datetime import date
 import errhandling as err
-import config
+import config as cfg
 
 
 def main_menu():
     """Основное меню калькулятора"""
     menu_items = 3
-    print(""""Главное меню:
-    1. Запустить калькулятор
-    2. Настройки калькулятора
-    3. Выход""")
-    value = input("Введите номер пункта меню: ")
-    if err.check_menu_error(value,3):
-        main_menu()
+    while True:
+        print(""""Главное меню:
+        1. Запустить калькулятор
+        2. Настройки калькулятора
+        3. Выход""")
+        value = input("Введите номер пункта меню: ")
+        if not err.check_menu_error(value, menu_items):
+            break
     return value
 
 
 def settings_menu():
+    status = cfg.history_recording_status
+    status_error = cfg.history_error_visiable_status
     """Меню настроек"""
-    menu_items = 5
-    print(""""Настройки:
-    1. Включить/выключить историю вычислений
-    2. Показать всю историю вычислений
-    3. Показать вычисления за дату
-    4. Удалить историю вычислений
-    5. Вернуться в главное меню""")
-    value = input("Введите номер пункта меню: ")
-    if err.check_menu_error(value,menu_items):
-        settings_menu()
+    menu_items = 6
+    while True:
+        print(f""""Настройки:
+        1. {'Включить' if not status else 'Выключить'} запись истории вычислений
+        2. {'Включить показ истории ошибок и статусов' if not status_error else 'Выключить показ истории ошибок и статусов'}
+        3. Показать всю историю
+        4. Показать историю за дату
+        5. Удалить историю вычислений
+        6. Вернуться в главное меню""")
+        value = input("Введите номер пункта меню: ")
+        if not err.check_menu_error(value, menu_items):
+            break
     return value
 
-def history_visiable():
-    """Включает/выключает историю вычислений"""
-    menu_items = 2
-    status = config.history_visiable_status
-    print(f""""История вычислений:
-    Статуст: {'включена' if status else 'выключена'}
-    1. {'Включить' if status else 'Выключить'}
-    2. Выход""")
-    value = input("Введите номер пункта меню: ")
-    if err.check_menu_error(value,menu_items):
-        history_visiable()
-    return value
 
-def print_history():
-    """Показывает историю вычислений"""
-    pass
-
-def print_history_by_date():
+def get_date():
     """Показывает историю вычислений за дату"""
-    pass
-
-def delete_history():
-    """Удаляет историю вычислений"""
-    pass
+    while True:
+        date = input("Введите дату в формате ДД.ММ.ГГГГ: ")
+        if not err.check_date_error(date):
+            if err.check_date_exist_in_log(date):
+                break
+    return date
