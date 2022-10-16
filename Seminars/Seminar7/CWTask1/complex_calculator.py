@@ -3,6 +3,7 @@ import logger as log
 
 
 def convert_complex_to_tupal(complex_number: str):
+    """Конвертация комплексного числа в кортеж"""
     complex_number = complex_number.replace(' ', '')
     complex_number = complex_number.replace('+-', '-')
     complex_number = complex_number.replace('--', '+')
@@ -13,11 +14,11 @@ def convert_complex_to_tupal(complex_number: str):
     complex_match = complex_pattern.match(complex_number)
     if complex_match:
         real_part = complex_match.group('real_part')
-        print(real_part)
-        print(type(real_part))
+        # print(real_part)
+        # print(type(real_part))
         imaginary_part = complex_match.group('imaginary_part')
-        print(imaginary_part)
-        print(type(imaginary_part))
+        # print(imaginary_part)
+        # print(type(imaginary_part))
         if real_part == None:
             real_part = 0
         else:
@@ -62,17 +63,22 @@ def sub_complex(number_1: str, number_2: str):
     return convert_tupal_to_complex((complex_number_1[0] - complex_number_2[0], complex_number_1[1] - complex_number_2[1]))
 
 
-def multiply_complex(complex_number_1: str, complex_number_2: str):
+def multiply_complex(number_1: str, number_2: str):
     """Умножение комплексных чисел"""
+    complex_number_1 = convert_complex_to_tupal(number_1)
+    complex_number_2 = convert_complex_to_tupal(number_2)
     return convert_tupal_to_complex(((complex_number_1[0] * complex_number_2[0] - complex_number_1[1] * complex_number_2[1]), (complex_number_1[0] * complex_number_2[1] + complex_number_1[1] * complex_number_2[0])))
 
 
-def divide_complex(complex_number_1: str, complex_number_2: str):
+def divide_complex(number_1: str, number_2: str):
     """Деление комплексных чисел"""
+    complex_number_1 = convert_complex_to_tupal(number_1)
+    complex_number_2 = convert_complex_to_tupal(number_2)
     return convert_tupal_to_complex(((complex_number_1[0] * complex_number_2[0] + complex_number_1[1] * complex_number_2[1]) / (complex_number_2[0] ** 2 + complex_number_2[1] ** 2), (complex_number_1[1] * complex_number_2[0] - complex_number_1[0] * complex_number_2[1]) / (complex_number_2[0] ** 2 + complex_number_2[1] ** 2)))
 
 
 def main():
+    """Главная функция"""
     while True:
         if input("для выхода нажмите 'q' или 'Q', для продолжения нажмите Enter") in ('q', 'Q'):
             break
@@ -81,12 +87,20 @@ def main():
             complex_number_2 = input("Введите второе комплексное число: ")
             op = input('Введите операцию: ')
             if op == '+':
+                print(f"{complex_number_1} + {complex_number_2} = {sum_complex(complex_number_1, complex_number_2)}")
+                log.write_log_calc(f'{complex_number_1} + {complex_number_2}', sum_complex(complex_number_1, complex_number_2))
                 return sum_complex(complex_number_1, complex_number_2)
             elif op == '-':
+                print(f"{complex_number_1} - {complex_number_2} = {sub_complex(complex_number_1, complex_number_2)}")
+                log.write_log_calc(f'{complex_number_1} - {complex_number_2}', sub_complex(complex_number_1, complex_number_2))
                 return sub_complex(complex_number_1, complex_number_2)
             elif op == '*':
+                print(f"{complex_number_1} * {complex_number_2} = {multiply_complex(complex_number_1, complex_number_2)}")
+                log.write_log_calc(f'{complex_number_1} * {complex_number_2}', multiply_complex(complex_number_1, complex_number_2))
                 return multiply_complex(complex_number_1, complex_number_2)
             elif op == '/':
+                print(f"{complex_number_1} / {complex_number_2} = {divide_complex(complex_number_1, complex_number_2)}")
+                log.write_log_calc(f'{complex_number_1} / {complex_number_2}', divide_complex(complex_number_1, complex_number_2))
                 return divide_complex(complex_number_1, complex_number_2)
             elif op == 'q' or op == 'Q':
                 break

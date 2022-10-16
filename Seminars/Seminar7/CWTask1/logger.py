@@ -3,7 +3,7 @@ import config as cfg
 
 
 
-def write_log_calc(expression: str, result: float):
+def write_log_calc(expression: str, result):
     """ Запись в лог вычислений """
     if cfg.history_recording_status:
         with open(cfg.PATH_LOG, 'a', encoding= 'utf-8') as f:
@@ -33,3 +33,8 @@ def read_all_log():
             log_list.append(log_element)
     return log_list
 
+def delete_history():
+    """ Удаление лога """
+    with open(cfg.PATH_LOG, 'w', encoding='utf-8') as f:
+        f.write('')
+    print('История удалена')
