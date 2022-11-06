@@ -9,7 +9,7 @@ def start():
         if choice == "Вход":
             entrance()
         elif choice == "Выход":
-            UI.exit(0)
+            exit(0)
         elif choice == "О программе":
             UI.about_window()
         elif choice == "Помощь":
@@ -25,7 +25,7 @@ def entrance():
         if log_pass != None:
             #Проверка логина и пароля
             if json_request.check_login(log_pass[0], log_pass[1]):
-                general(json.request.get_user_id(log_pass[0]))
+                general(json_request.get_user_id(log_pass[0]))
             else:
                 errorhandling.error_window("Неверный логин или пароль") 
         else:
@@ -76,7 +76,29 @@ def choose_object(user_id:int):
     choice = json_request.get_object_id(UI.choose_object_window(user_id))
     if choice == None:
         errorhandling.error_window("Объект не выбран")
-    return choice 
+    elif choice == "Добавить объект":
+        add_object(user_id)
+    else:
+        return choice
+
+def object_menu(user_id:int, object_id:int):
+    while True:
+        choice = UI.object_menu_window(user_id, object_id)
+        if choice == "Изменить объект":
+            change_object(user_id, object_id)
+        elif choice == "Удалить объект":
+            delete_object(user_id, object_id)
+            break
+        elif choice == "Выход":
+            break
+        else:
+            errorhandling.error_window("Ошибка в object_menu_window")
+
+def add_object(user_id:int):
+    """Добавляет объект"""
+    data = UI.add_object_window(user_id)
+    if data != None:
+        json_request.add_object(user_id, data)
 
 def documentation(user_id:int, object_id:int):
     """Возвращает id документа из меню документации и запускает меню документа"""
@@ -113,7 +135,8 @@ def sign_request(user_id:int, object_id:int, document_id:int):
     else:
         errorhandling.error_window("Неверный id")
 
+def main():
+    start()
 
-
-
-        
+if __name__ == "__main__":
+    main()

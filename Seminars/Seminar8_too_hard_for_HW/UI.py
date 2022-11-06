@@ -10,11 +10,11 @@ def start_window():
     msg = "Выберите действие"
     title = "Главное меню"
     choices = ["Вход", "Выход", "О программе", "Помощь", "Справка"]
-    choice = easygui.choicebox(msg, title, choices)
+    choice = easygui.buttonbox(msg, title, choices)
     return  choice
 
 # Окно входа
-def entance_window():
+def entrance_window():
     """Окно входа"""
     msg = "Введите логин и пароль"
     title = "Вход"
@@ -65,8 +65,34 @@ def choose_object_window(user_id:str):
     msg = "Выберите объект"
     title = f"Выбор объекта. Пользователь:{user_id}"
     choices = json_request.get_object_list()
+    choices.append("Добавить объект")
     choice = easygui.choicebox(msg, title, choices)
     return choice
+
+def object_menu_window(user_id:str, object_id:str):
+    """Окно меню объекта"""
+    msg = "Выберите действие"
+    title = f"Пользователь:{user_id}. Объект:{object_id}"
+    choices = ["Изменить объект", "Удалить объект", "Выход"]
+    choice = easygui.choicebox(msg, title, choices)
+    return choice
+
+def add_object_window(user_id:str, object_id:str = None):
+    """Окно добавления объекта"""
+    if object_id:
+        msg = "Введите данные для изменения объекта"
+        title = f"Изменение объекта. Пользователь:{user_id}. Объект:{object_id}"
+    else:
+        msg = "Введите данные для добавления объекта"
+        title = f"Добавить объект. Пользователь:{user_id}"
+        field_names = ["Название объекта", "Адрес объекта", "Дата начала работ"]
+    field_values = easygui.multenterbox(msg, title, field_names)
+    data = {
+        'object_title': field_values[0],
+        'object_address': field_values[2],
+        'object_start_date': field_values[3]
+    }
+    return data
 
 def documentation_window(user_id:str, object_id:str):
     """Окно списка документации по объекту"""
@@ -88,14 +114,14 @@ def document_menu_window(User_id:str, object_id:str, documentation_id:str):
 def download_file_window(user_id:str, object_id:str, document_id:str):
     """Окно сохранения файла"""
     msg = "Выберите действие"
-    title = "Скачать документ"
+    title = "Загрузить документ из базы"
     download_path = easygui.filesavebox(msg, title)
     return download_path
 
 def open_file_window(user_id:str, object_id:str, file_path:str):
     """Окно открытия файла"""
     msg = "Выберите действие"
-    title = "Открыть документ"
+    title = "Закгрузить документ в базу"
     download_path = easygui.filesavebox(msg, title)
     return download_path
 
@@ -105,4 +131,23 @@ def sign_request_window(user_id:str, object_id:str, document_title:str):
     title = f"Запросить подпись. Пользователь:{user_id}. Объект:{object_id}. Документ:{document_title}"
     choices = json_request.get_employee_list(user_id, object_id)
     choice = easygui.choicebox(msg, title, choices)
+    return choice
+
+def about_window():
+    """Окно о программе"""
+    msg = "О программе"
+    title = "О программе"
+    easygui.msgbox(msg, title)
+
+def help_window():
+    """Окно справки"""
+    msg = "Помощь"
+    title = "Помощь"
+    easygui.msgbox(msg, title)
+
+def reference_window():
+    """Окно справки"""
+    msg = "Справка"
+    title = "Справка"
+    easygui.msgbox(msg, title)
 
