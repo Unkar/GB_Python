@@ -11,9 +11,13 @@
 #       'about_me': 'about_me',
 #       'user_status': 'user_status'},
 #      {'user_id': 'user_id2', ...}]
+
+#viewed.json structure
+#viewed_list = [{'viewer': 'user_id1', 'viewed': 'user_id2', date: 'date'},...]
 import json
 import os
 import config
+import datetime
 
 
 def get_db():
@@ -90,4 +94,32 @@ def get_users_by_status(user_status):
             users.append(f"{user['user_id']} ::: {user['user_surname']} {user['user_name']} {user['user_birthday']} {user['user_status']}")
     return users
 
+def get_viewed_list(user_id):
+    viewed_list = []
+    personal_viewed_list = []
+    with open(config.PATH_VIEWED, 'r', encoding="utf-8") as f:
+        viewed_list = json.load(f)
+    for viewed in viewed_list:
+        if viewed['viewer'] == user_id:
+            personal_viewed_list.append(f"{viewed['viewed']} ::: {viewed['date']}")
+    return personal_viewed_list
 
+def get_viewer_list(user_id):
+    viewed_list = []
+    personal_viewer_list = []
+    with open(config.PATH_VIEWED, 'r', encoding="utf-8") as f:
+        viewed_list = json.load(f)
+    for viewed in viewed_list:
+        if viewed['viewed'] == user_id:
+            personal_viewer_list.append(f"{viewed['viewer']} ::: {viewed['date']}")
+    return personal_viewer_list
+
+def add_viewed(viewer, viewed):
+    viewed_list = []
+    with open(config.PATH_VIEWED, 'r', encoding="utf-8") as f:
+        viewed_list = json.load(f)
+    viewed_list.append({'viewer': viewer, 'viewed': viewed, 'date': f"{datetime.datetime.now().strftime('%d.%m.%Y %H:%M:%S')}"})
+    with open(config.PATH_VIEWED, 'w', encoding="utf-8") as f:
+        json.dump(viewed_list, f)
+
+   

@@ -74,26 +74,27 @@ def profile(user_id):
 
 def general(user_id):
     try:
-        global session_id
-        session_id = user_id
-        choice = UI.main_menu_window(user_id)
-        person = ""
-        if choice == "Посмотреть список пользователей":
-            person = UI.users_list_window(json_request.get_users())
-        elif choice == "Посмотреть кто смотрел мой профиль":
-            person = UI.users_list_window(log.get_viewers(user_id))
-        elif choice == "Посмотреть кого смотрели вы":
-            person = UI.users_list_window(log.get_viewed(user_id))
-        elif choice == "Выход":
-            return
-        else:
-            error_handler.error_window(
-            "Ошибка в main_menu_window", session_id)
-        if person != None:
-                # Просмотр профиля c обрезанием UID
-                profile(person[:person.find(":::")].strip())
-                # Добавление в просмотренные
-                log.add_viewed(user_id, person)
+        while True:
+            global session_id
+            session_id = user_id
+            choice = UI.main_menu_window(user_id)
+            person = ""
+            if choice == "Посмотреть список пользователей":
+                person = UI.users_list_window(json_request.get_users())
+            elif choice == "Посмотреть кто смотрел мой профиль":
+                person = UI.users_list_window(json_request.get_viewer_list(user_id))
+            elif choice == "Посмотреть кого смотрели вы":
+                person = UI.users_list_window(json_request.get_viewed_list(user_id))
+            elif choice == "Выход" or choice == None:
+                return
+            else:
+                error_handler.error_window(
+                "Ошибка в main_menu_window", session_id)
+            if person != None:
+                    # Просмотр профиля c обрезанием UID
+                    profile(person[:person.find(":::")].strip())
+                    # Добавление в просмотренные
+                    json_request.add_viewed(user_id, person[:person.find(":::")].strip())
     except Exception as e:
         error_handler.error_window(e)
 
