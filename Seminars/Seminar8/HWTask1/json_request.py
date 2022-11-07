@@ -56,14 +56,14 @@ def registration(user_info):
     db.append({'user_id': user_id,
                'user_login': user_info[0],
                'user_password': user_info[1],
-               'user_surname': user_info[2],
-               'user_name': user_info[3],
-               'user_patronymic': user_info[4],
-               'user_birthday': user_info[5],
-               'user_phone': user_info[6],
-               'user_email': user_info[7],
-               'about_me': user_info[8],
-               'user_status': user_info[9]})
+               'user_surname': user_info[3],
+               'user_name': user_info[4],
+               'user_patronymic': user_info[5],
+               'user_birthday': user_info[6],
+               'user_phone': user_info[7],
+               'user_email': user_info[8],
+               'about_me': user_info[9],
+               'user_status': user_info[10]})
     save_db(db)
     return user_id
 
@@ -107,11 +107,15 @@ def get_viewed_list(user_id):
 def get_viewer_list(user_id):
     viewed_list = []
     personal_viewer_list = []
+    db = get_db()
     with open(config.PATH_VIEWED, 'r', encoding="utf-8") as f:
         viewed_list = json.load(f)
     for viewed in viewed_list:
         if viewed['viewed'] == user_id:
-            personal_viewer_list.append(f"{viewed['viewer']} ::: {viewed['date']}")
+            for user in db:
+                if user['user_id'] == viewed['viewer']:
+                    personal_viewer_list.append(f"{user['user_id']} ::: {user['user_surname']} {user['user_name']} {user['user_birthday']} {user['user_status']} ::: {viewed['date']}")
+            personal_viewer_list.append(f"{viewed['viewer']} :::  {viewed['date']}")
     return personal_viewer_list
 
 def add_viewed(viewer, viewed):
